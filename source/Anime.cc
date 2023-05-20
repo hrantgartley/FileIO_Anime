@@ -3,17 +3,17 @@
 #include <fstream>
 #include <iostream>
 
-void AnimeQueueManager::run() {
+void AnimeQueueManager::Run() {
     std::cout << "Welcome to the anime show queue manager\n";
     int Number = getNum();
-    std::vector<std::string> itemsToAdd = getInput();
-    if (itemsToAdd.empty()) {
+    std::vector<std::string> ItemsToAdd = getInput();
+    if (ItemsToAdd.empty()) {
         std::cout << "No anime titles found in the file.\n";
         return;
     }
-    addToArray(mainVector, Number);
-    std::cout << "Items in the queue: " << mainVector.size() << std::endl;
-    for (const auto& item : mainVector) {
+    addToArray(MainVector, Number);
+    std::cout << "Items in the queue: " << MainVector.size() << std::endl;
+    for (const auto& item : MainVector) {
         std::cout << item << std::endl;
     }
 }
@@ -27,9 +27,9 @@ void AnimeQueueManager::addToArray(std::vector<std::string>& Array, int NumTitle
 std::vector<std::string> AnimeQueueManager::getInput() {
     std::vector<std::string> AnimeTitles;
     std::string Line;
-    std::ifstream AnimeFile(fileName);
+    std::ifstream AnimeFile(FileName);
     if (!AnimeFile.is_open()) {
-        std::cout << "Failed to open the file: " << fileName << std::endl;
+        std::cout << "Failed to open the file: " << FileName << std::endl;
         return AnimeTitles;
     }
     while (std::getline(AnimeFile, Line)) {

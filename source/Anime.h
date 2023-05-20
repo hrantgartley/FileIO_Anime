@@ -6,14 +6,13 @@
 
 class AnimeQueueManager {
    private:
-    std::vector<std::string> mainVector;
+    std::vector<std::string> MainVector;
     std::vector<std::string> newTitles;
-    std::string fileName;
+    std::string FileName;
 
    public:
-    AnimeQueueManager(const std::string& file) : fileName(file) {}
-
-    void run();
+    AnimeQueueManager(const std::string& file) : FileName(file) {}
+    void Run();
 
    private:
     void addToArray(std::vector<std::string>& array, int numTitles);

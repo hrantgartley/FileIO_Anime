@@ -1,8 +1,7 @@
 #include "Anime.h"
 
-
 int main() {
-    AnimeQueueManager manager("source/anime.txt");
-    manager.run();
+    AnimeQueueManager manager("anime.txt");
+    manager.Run();
     return 0;
 }
