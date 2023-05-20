@@ -3,8 +3,8 @@
 #include <fstream>
 #include <iostream>
 
-void AnimeQueueManager::ClearQueue() {
-    MainVector.clear();
+AnimeQueueManager::~AnimeQueueManager() {
+    std::cout << "\n";
 }
 
 void AnimeQueueManager::Run() {
@@ -21,6 +21,7 @@ void AnimeQueueManager::Run() {
     for (const auto& Item : MainVector) {
         std::cout << Item << std::endl;
     }
+    std::cout << std::endl;
 
     std::cout << "Search for a title: ";
     std::string Keyword;
@@ -36,6 +37,7 @@ void AnimeQueueManager::Run() {
     for (const auto& Item : SearchResults) {
         std::cout << Item << std::endl;
     }
+    ClearQueue();
 }
 
 void AnimeQueueManager::addToArray(std::vector<std::string>& Array, int NumTitles) {
@@ -79,9 +81,9 @@ std::vector<std::string> AnimeQueueManager::SearchTitles(const std::string& Keyw
         return AnimeTitles;
     }
 
-    std::string lowercaseKeyword = ToLowerCase(Keyword);  // Convert the keyword to lowercase
+    std::string lowercaseKeyword = ToLowerCase(Keyword);
     while (std::getline(AnimeFile, Line)) {
-        std::string lowercaseLine = ToLowerCase(Line);  // Convert the line to lowercase
+        std::string lowercaseLine = ToLowerCase(Line);
         if (lowercaseLine.find(lowercaseKeyword) != std::string::npos) {
             AnimeTitles.push_back(Line);
         }
@@ -97,4 +99,8 @@ std::string AnimeQueueManager::ToLowerCase(const std::string& str) {
         result += std::tolower(c);
     }
     return result;
+}
+
+void AnimeQueueManager::ClearQueue() {
+    MainVector.clear();
 }

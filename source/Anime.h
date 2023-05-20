@@ -3,17 +3,18 @@
 
 #include <string>
 #include <vector>
+#include <iostream>
 
 class AnimeQueueManager {
    private:
     std::vector<std::string> MainVector;
-    std::vector<std::string> newTitles;
     std::string FileName;
 
    public:
     AnimeQueueManager(const std::string& file) : FileName(file) {}
-    void ClearQueue();
+    ~AnimeQueueManager();
     void Run();
+    void ClearQueue();
 
    private:
     void addToArray(std::vector<std::string>& array, int numTitles);
