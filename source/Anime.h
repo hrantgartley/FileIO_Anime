@@ -12,12 +12,15 @@ class AnimeQueueManager {
 
    public:
     AnimeQueueManager(const std::string& file) : FileName(file) {}
+    void ClearQueue();
     void Run();
 
    private:
     void addToArray(std::vector<std::string>& array, int numTitles);
     std::vector<std::string> getInput();
     int getNum();
+    std::vector<std::string> SearchTitles(const std::string& Keyword);
+    std::string ToLowerCase(const std::string& Str);
 };
 
 #endif
