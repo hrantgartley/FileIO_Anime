@@ -3,7 +3,6 @@
 
 #include <string>
 #include <vector>
-#include <iostream>
 
 class AnimeQueueManager {
    private:
@@ -22,6 +21,9 @@ class AnimeQueueManager {
     int getNum();
     std::vector<std::string> SearchTitles(const std::string& Keyword);
     std::string ToLowerCase(const std::string& Str);
+    void BeginningPrompt() const;
+    void EndingPrompt() const;
+    void SortByFirstWord();
 };
 
 #endif

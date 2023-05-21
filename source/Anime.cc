@@ -1,14 +1,16 @@
 #include "Anime.h"
 
+#include <algorithm>
 #include <fstream>
 #include <iostream>
+#include <string>
 
 AnimeQueueManager::~AnimeQueueManager() {
     std::cout << "\n";
 }
 
 void AnimeQueueManager::Run() {
-    std::cout << "Welcome to the anime show queue manager\n";
+    BeginningPrompt();
     int Number = getNum();
     std::vector<std::string> ItemsToAdd = getInput();
     if (ItemsToAdd.empty()) {
@@ -34,10 +36,12 @@ void AnimeQueueManager::Run() {
     }
 
     std::cout << "Results found: " << SearchResults.size() << std::endl;
+    SortByFirstWord();
     for (const auto& Item : SearchResults) {
         std::cout << Item << std::endl;
     }
     ClearQueue();
+    EndingPrompt();
 }
 
 void AnimeQueueManager::addToArray(std::vector<std::string>& Array, int NumTitles) {
@@ -65,10 +69,10 @@ std::vector<std::string> AnimeQueueManager::getInput() {
 }
 
 int AnimeQueueManager::getNum() {
-    int num{};
+    int Num{};
     std::cout << "How many anime to read? ";
-    std::cin >> num;
-    return num;
+    std::cin >> Num;
+    return Num;
 }
 
 std::vector<std::string> AnimeQueueManager::SearchTitles(const std::string& Keyword) {
@@ -81,10 +85,10 @@ std::vector<std::string> AnimeQueueManager::SearchTitles(const std::string& Keyw
         return AnimeTitles;
     }
 
-    std::string lowercaseKeyword = ToLowerCase(Keyword);
+    std::string LowercaseKeyword = ToLowerCase(Keyword);
     while (std::getline(AnimeFile, Line)) {
         std::string lowercaseLine = ToLowerCase(Line);
-        if (lowercaseLine.find(lowercaseKeyword) != std::string::npos) {
+        if (lowercaseLine.find(LowercaseKeyword) != std::string::npos) {
             AnimeTitles.push_back(Line);
         }
     }
@@ -93,14 +97,34 @@ std::vector<std::string> AnimeQueueManager::SearchTitles(const std::string& Keyw
 }
 
 std::string AnimeQueueManager::ToLowerCase(const std::string& str) {
-    std::string result;
-    result.reserve(str.size());
+    std::string Result;
+    Result.reserve(str.size());
     for (char c : str) {
-        result += std::tolower(c);
+        Result += std::tolower(c);
     }
-    return result;
+    return Result;
 }
 
 void AnimeQueueManager::ClearQueue() {
     MainVector.clear();
+}
+
+void AnimeQueueManager::BeginningPrompt() const {
+    std::cout << "Welcome to the anime show queue manager\n";
+}
+void AnimeQueueManager::EndingPrompt() const {
+    std::cout << "\n";
+    std::cout << "Thank you for using the anime queue manager\n";
+}
+
+void AnimeQueueManager::SortByFirstWord() {
+    for (int i = 1; i < MainVector.size(); i++) {
+        std::string Key = MainVector[i];
+        int j = i - 1;
+        while (j >= 0 && MainVector[j] > Key) {
+            MainVector[j + 1] = MainVector[j];
+            j--;
+        }
+        MainVector[j + 1] = Key;
+    }
 }
