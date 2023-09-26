@@ -6,7 +6,7 @@
 #include <string>
 
 AnimeQueueManager::~AnimeQueueManager() {
-    std::cout << "\n";
+    std::cout << "ANIME DESTRUCTOR CALLED\n";
 }
 
 void AnimeQueueManager::Run() {
